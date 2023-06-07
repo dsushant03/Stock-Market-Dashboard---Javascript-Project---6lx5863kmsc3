@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+  <div id="title">
+    <h1>EeeazyStock</h1>
+  </div>
 
+  <div id="search-container">
+    <input type="text" id="search-box" placeholder="Search...">
+    <button id="btn">Search</button>
+    <br><br>
+    <button id="btn-intra" class="btn">Intraday</button>
+    <button id="btn-day" class="btn">Daily</button>
+    <button id="btn-week" class="btn">Weekly</button>
+    <button id="btn-month" class="btn">Monthly</button>
+  </div>
+  
+<div id="watchlist-head">
+  <h2>Watchlist</h2>
+  <h4>(Click symbol to view history data)</h4>
+</div>
+
+  <div id="watchlist-container">
+    <h3 id="initText">Search symbols and select timeframe to add your favourites here ..!</h3>
+    <div id="watchlist">
+
+    </div>
+  </div>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close"><img src="cross.png" width="25px" height="25px"></span>
+
+      <h2 id="modal-head"></h2>
+      <table class="my-table">
+          <thead>
+            <tr>
+              <th id="date"> </th>
+              <th>OPEN</th>
+              <th>HIGH</th>
+              <th>LOW</th>
+              <th>CLOSE</th>
+              <th>VOLUME</th>
+            </tr>
+          </thead>
+          
+          <tbody id="table-body">
+
+          </tbody>
+        </table>
+    </div>
+  </div>
+  
+  </body>
+
+<script src="App.js"></script>
+
+</html>

@@ -174,10 +174,7 @@ function setInitialText(){
 }
 
 /*------------------------------------------------------------------------------------------------------*/
-
-
-
-
+                                            /*   MODAL   */
 
 closeModal.addEventListener("click", function() {
   modal.style.display = "none";

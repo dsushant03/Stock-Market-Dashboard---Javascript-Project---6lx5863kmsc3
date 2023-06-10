@@ -35,7 +35,7 @@ async function appendToWatchlist(){
     
     if(selectedTimeframeId == "")
     {
-        alert("Please select a timeframe")
+        alert("Please select a timeframe");
         return
     }
 
@@ -110,8 +110,8 @@ async function getData(symbol){
         alert("Please do the honours")
         return -1
     }
-    
-    if(allStocks.hasOwnProperty(symbol))
+
+    if(allStocks.hasOwnProperty(`allStocks-${symbol}-${selectedTimeframeId}`))
     {
         alert("Try a new stock")
         input.value = ''

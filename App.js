@@ -41,7 +41,6 @@ async function appendToWatchlist(){
 
     let symbol = input.value
     let data = await getData(symbol)
-    // console.log(data)
 
     if(data == -1)
         return
@@ -50,34 +49,41 @@ async function appendToWatchlist(){
     allStocks[key] = data
     nStocks++
     setInitialText()
-    // console.log(allStocks)
     
     const deleteButton = document.createElement("div")
-    deleteButton.innerHTML = "x"
+    deleteButton.innerHTML = "⨯"
 
     deleteButton.style.height = "30px"
-    deleteButton.style.width = "30px"
+    deleteButton.style.width = "35px"
     deleteButton.style.backgroundColor = "white"
     deleteButton.style.borderRadius = "50%"
     deleteButton.style.paddingLeft = "8px"
-    deleteButton.style.paddingBottom = "6px"
     deleteButton.style.fontWeight = "1000"
     deleteButton.style.fontSize = "25px"
     deleteButton.style.cursor = "pointer"
 
-    deleteButton.setAttribute('id',symbol)
-    deleteButton.addEventListener("click", deleteStock)
-    deleteButton.setAttribute('src',"cross.png")
+    deleteButton.setAttribute('id',`btn-${symbol}-${selectedTimeframeId}`)
     deleteButton.setAttribute('width',"25")
     deleteButton.setAttribute('height',"25")
+    deleteButton.addEventListener("click", deleteStock)
+    deleteButton.addEventListener("mouseover", (e)=>{
+        deleteButton.style.backgroundColor = "red"
+    })
+    deleteButton.addEventListener("mouseleave", (e)=>{
+        deleteButton.style.backgroundColor = "white"
+    })
 
     const stockSymbol = document.createElement("div")
     stockSymbol.innerText = symbol.toUpperCase()
     stockSymbol.setAttribute('class',"watch")
     stockSymbol.classList.add('stock-symbol')
-    console.log(stockSymbol)
     stockSymbol.setAttribute('id',`${symbol}-${selectedTimeframeId}`)
-    
+    stockSymbol.addEventListener("mouseover", (e)=>{
+        stockSymbol.style.backgroundColor = "green"
+    })
+    stockSymbol.addEventListener("mouseleave", (e)=>{
+        stockSymbol.style.backgroundColor = "#ccc"
+    })
     stockSymbol.addEventListener("click", (e)=>addDataToModal(e.target.id))
 
     let text;
@@ -106,15 +112,13 @@ async function appendToWatchlist(){
     el.append(stockSymbol)
     el.append(timeFrame)
     el.append(deleteButton)
-    el.setAttribute('id', `div_${symbol}`)
+    el.setAttribute('id', `div-${symbol}-${selectedTimeframeId}`)
     el.setAttribute('class', "watch-container")
     el.style.backgroundColor = "black"
 
-    // console.log(watchlist)
     watchlist.append(el)
     
     input.value = ''
-    // console.log(selectedTimeframeId)
 }
 
 async function getData(symbol){
@@ -163,13 +167,14 @@ async function getData(symbol){
 }
 
 function deleteStock(e) {
-    let id = `div_${e.target.id}`
-    document.getElementById(id).remove()
-    delete allStocks[e.target.id]
+    // e.target.id = btn-${symbol}-${selectedTimeframeId}
+    let id = e.target.id.slice(4)
+    document.getElementById(`div-${id}`).remove()
+    delete allStocks[`allStocks-${id}`]
     nStocks--
 
     // for initial text
-    if(Object.keys(allStocks).length == 0)
+    if(nStocks == 0)
     {
         isEmpty = true
     }
@@ -200,7 +205,6 @@ window.addEventListener("click", function(event) {
 }})
 
 function addDataToModal(id){
-    // console.log(id)
     document.getElementById('table-body').innerHTML = ""
     let entriesObj = allStocks[`allStocks-${id}`]
     let entries;
@@ -240,9 +244,6 @@ function addDataToModal(id){
         default:
             break;
     }
-
-    // console.log(allStocks[`allStocks-${id}`])
-    // console.log(entries)
     
     for(let key in entries)
     {

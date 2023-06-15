@@ -52,7 +52,19 @@ async function appendToWatchlist(){
     setInitialText()
     // console.log(allStocks)
     
-    const deleteButton = document.createElement("img")
+    const deleteButton = document.createElement("div")
+    deleteButton.innerHTML = "x"
+
+    deleteButton.style.height = "30px"
+    deleteButton.style.width = "30px"
+    deleteButton.style.backgroundColor = "white"
+    deleteButton.style.borderRadius = "50%"
+    deleteButton.style.paddingLeft = "8px"
+    deleteButton.style.paddingBottom = "6px"
+    deleteButton.style.fontWeight = "1000"
+    deleteButton.style.fontSize = "25px"
+    deleteButton.style.cursor = "pointer"
+
     deleteButton.setAttribute('id',symbol)
     deleteButton.addEventListener("click", deleteStock)
     deleteButton.setAttribute('src',"cross.png")
@@ -60,8 +72,10 @@ async function appendToWatchlist(){
     deleteButton.setAttribute('height',"25")
 
     const stockSymbol = document.createElement("div")
-    stockSymbol.innerText = symbol
+    stockSymbol.innerText = symbol.toUpperCase()
     stockSymbol.setAttribute('class',"watch")
+    stockSymbol.classList.add('stock-symbol')
+    console.log(stockSymbol)
     stockSymbol.setAttribute('id',`${symbol}-${selectedTimeframeId}`)
     
     stockSymbol.addEventListener("click", (e)=>addDataToModal(e.target.id))

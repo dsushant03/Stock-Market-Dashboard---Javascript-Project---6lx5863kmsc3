@@ -82,12 +82,10 @@
     display: flex;
     padding: 1px;
     justify-content: center;
-    cursor: pointer;
   }
-  
-  img{
+
+  .stock-symbol{
     cursor: pointer;
-    float: right;
   }
   
   

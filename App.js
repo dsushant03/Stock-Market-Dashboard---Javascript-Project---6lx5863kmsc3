@@ -3,6 +3,7 @@ const watchlist = document.getElementById('watchlist');
 const input = document.getElementById('search-box');
 const modalHead = document.getElementById('modal-head')
 const allStocks = {}
+const dateInTable = document.getElementById('date')
 let nStocks = 0
 let selectedTimeframeId = ""
 let url = ""
@@ -213,7 +214,7 @@ function addDataToModal(id){
         case 'a':
             timeframe = "intraday"
             let intradayDate = entriesObj["Meta Data"]["3. Last Refreshed"].slice(0,10)
-            document.getElementById('date').innerText = intradayDate
+            dateInTable.innerText = intradayDate
             entries = entriesObj["Time Series (5min)"]
             modalHead.innerText = `${entriesObj["Meta Data"]["2. Symbol"].toUpperCase()} - INTRADAY`
             break;
@@ -221,6 +222,7 @@ function addDataToModal(id){
         //day
         case 'y':
             timeframe = "daily"
+            dateInTable.innerText = ""
             entries = entriesObj["Time Series (Daily)"]
             modalHead.innerText = `${entriesObj["Meta Data"]["2. Symbol"].toUpperCase()} - DAILY`
             break;
@@ -228,6 +230,7 @@ function addDataToModal(id){
         //week
         case 'k':
             timeframe = "weekly"
+            dateInTable.innerText = ""
             entries = entriesObj["Weekly Time Series"]
             modalHead.innerText = `${entriesObj["Meta Data"]["2. Symbol"].toUpperCase()} - WEEKLY`
             break;
@@ -235,6 +238,7 @@ function addDataToModal(id){
         //month
         case 'h':
             timeframe = "monthly"
+            dateInTable.innerText = ""
             entries = entriesObj["Monthly Time Series"]
             modalHead.innerText = `${entriesObj["Meta Data"]["2. Symbol"].toUpperCase()} - MONTHLY`
             break;
